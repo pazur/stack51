@@ -12,7 +12,7 @@ import qualified Data.Tree as T
 import AsmParser
 import Graph
 
-
+type EdgeDict = M.Map (Maybe Label) Int
 
 removeDuplicateEdges :: Graph -> GraphTrans
 removeDuplicateEdges g = return $ map maxEdges g
@@ -24,10 +24,10 @@ maxEdgesRename r v = Vertex (label v) $ maxEdges' r v
 maxEdges' :: (Label -> Maybe Label) -> Vertex -> [Edge]
 maxEdges' r v = map (uncurry Edge) (M.toList (maxEdges'' r v))
 maxEdges'' :: (Label -> Maybe Label) -> Vertex -> M.Map (Maybe Label) Int
-maxEdges'' r (Vertex l e) = foldl (maxEDict r l) M.empty e
+maxEdges'' r (Vertex l e) = foldl (flip (maxEDict r l)) M.empty e
 
-maxEDict :: (Label -> Maybe Label) -> Label -> M.Map (Maybe Label) Int -> Edge -> M.Map (Maybe Label) Int
-maxEDict r vlabel dict (Edge to weight) = M.insertWith max (label >>= r) weight dict
+maxEDict :: (Label -> Maybe Label) -> Label -> Edge -> EdgeDict -> EdgeDict
+maxEDict r vlabel (Edge to weight) = M.insertWith max (label >>= r) weight
       where label = fmap (\x -> if x == "." then vlabel else x) to
 
 connectZero :: Graph -> GraphTrans
@@ -36,9 +36,10 @@ connectZero vs = let (g, vtn, ktv) = toGraph isZeroEdge vs
         in return $ merge (map (toVert vtn) sccs)
 
 --toGraph :: (Edge -> bool) -> [Vertex] -> ...
-toGraph ef vs = G.graphFromEdges $ (Vertex "" [], "", []):(map (toGraph' ef) vs)
+toGraph ef vs = G.graphFromEdges $ (Vertex "" [], "", []): map (toGraph' ef) vs
 toGraph' :: (Edge -> Bool) -> Vertex -> (Vertex, Label, [Label])
-toGraph' ef v = (v, label v, map ((fromMaybe "") . edgeTo) (filter ef (edges v)))
+toGraph' ef v = (v, label v, eds) where
+    eds = map ((fromMaybe "") . edgeTo) (filter ef (edges v))
 
 isZeroEdge :: Edge -> Bool
 isZeroEdge (Edge _ x) = x == 0
@@ -50,17 +51,20 @@ toVert f = map (fst3 . f)
 merge :: [[Vertex]] -> [Vertex]
 merge vss = map (merge' (rename vss)) vss
 merge' :: M.Map Label Label -> [Vertex] -> Vertex
-merge' m vs = maxEdgesRename (flip M.lookup m) $ Vertex (m M.! fstlabel) (join (map edges vs))
-    where Vertex fstlabel _ = head vs
+merge' m vs = maxEdgesRename (flip M.lookup m) vertex where
+    Vertex fstlabel _ = head vs
+    vertex = Vertex (m M.! fstlabel) (join (map edges vs))
 
 rename :: [[Vertex]] -> M.Map Label Label
 rename = rename' M.empty
 rename' acc [] = acc
-rename' acc (h:t) = rename' (foldl (\d x -> M.insert (label x) (label (head h)) d) acc h) t
+rename' acc (h:t) = rename' (foldl fun acc h) t where
+    fun d x = M.insert (label x) (label (head h)) d
 
 removeZeroCycles :: Graph -> GraphTrans
 removeZeroCycles g = return $ map removeZeroCycles' g
-removeZeroCycles' (Vertex l es) = Vertex l (filter ((\e -> edgeTo e /= Just l || edgeWeight e /= 0)) es)
+removeZeroCycles' (Vertex l es) = Vertex l (filter f es) where
+    f e = edgeTo e /= Just l || edgeWeight e /= 0
 
 
 checkCycles :: Graph -> GraphTrans
@@ -90,8 +94,8 @@ topSort rg = let (g, k, _) = toGraph (\x -> True) rg
     in return $ toVert k (G.topSort g)
 
 stackAnal :: Graph -> Trans (M.Map Label Int)
-stackAnal g = reverseGraph g >>= topSort >>= (\x -> return (stackAnal' M.empty x))
+stackAnal g = reverseGraph g >>= topSort >>=  return . (stackAnal' M.empty)
 stackAnal' acc [] = acc
-stackAnal' acc ((Vertex l e):t) = let acc' = M.insertWith max l 0 acc
-    in let v = acc' M.! l
-        in stackAnal' (foldl (\d (Edge (Just l1) k) -> M.insertWith max l1 (k+v) d) acc' e) t
+stackAnal' acc ((Vertex l e):t) = stackAnal' (foldl f acc' e) t where
+        acc' = M.insertWith max l 0 acc
+        f d (Edge (Just l1) k) = M.insertWith max l1 (k+ (acc' M.! l)) d

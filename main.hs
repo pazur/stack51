@@ -1,7 +1,8 @@
 module Main where
 
 import System.Environment
-
+import Control.Applicative
+import Data.Maybe
 import Control.Monad.State.Lazy
 import Control.Monad.Error
 import Control.Monad.Identity
@@ -21,8 +22,7 @@ printResult t = do
     printWarnings warnings
     printResult' res
 printWarnings :: [String] -> IO ()
-printWarnings [] = return ()
-printWarnings (h:t) = putStr ("WARNING: " ++ h ++ "\n") >> printWarnings t
+printWarnings = mapM_ $ \h -> putStr ("WARNING: " ++ h ++ "\n")
 printResult' (Left msg) = putStr $ "ERROR: " ++ msg
 printResult' (Right m) = printProgram m >> printInterrupt m
 
@@ -33,25 +33,16 @@ printInterrupt :: M.Map Label Int -> IO ()
 printInterrupt = printKey "__interrupts"
 
 printKey :: Label -> M.Map Label Int -> IO ()
-printKey k m = do
-    let x = M.lookup k m
-    putStr $ (show k) ++ ": "
-    case x of
-        Nothing -> putStr "--"
-        Just a -> putStr $ show a
-    putStr "\n"
-    return ()
+printKey k m = putStr $ (show k) ++ ": " ++ res ++ "\n" where
+    res = fromMaybe "--" (show <$> (M.lookup k m))
 
 printProg :: Program -> IO ()
-printProg p= do
-    let res = doAnal p
-    printResult res
-    return ()
+printProg = printResult . doAnal
 
 main = do
     args <- getArgs
     case args of
         [] -> fail "No input file given"
         _:_:t -> fail "Too many arguments"
-        [a] -> readFile a >>= \x -> printProg ((asm . lexer) x)
+        [a] -> readFile a >>= printProg . asm . lexer
 
