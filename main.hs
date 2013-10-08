@@ -2,6 +2,7 @@ module Main where
 
 import System.Environment
 import Control.Applicative
+import Data.List
 import Data.Maybe
 import Control.Monad.State.Lazy
 import Control.Monad.Error
@@ -14,35 +15,39 @@ import GraphAlg
 
 import qualified Data.Map as M
 
-doAnal p = parseProgram p >>= removeDuplicateEdges >>= connectZero >>= removeZeroCycles >>= stackAnal
+doAnalX p = do
+    g <- (parseProgram p >>= removeDuplicateEdges >>= connectZero >>= removeZeroCycles)
+    m <- stackAnal g
+    return (g, m)
 
-printResult :: Trans (M.Map Label Int) -> IO ()
-printResult t = do
+printResultX :: Trans (Graph, M.Map Label Int) -> IO ()
+printResultX t = do
     let (res, warnings) = runIdentity $ runStateT (runErrorT t) []
     printWarnings warnings
-    printResult' res
+    printResultX' res
+printResultX' (Left msg) = putStr $ "ERROR: " ++ msg
+printResultX' (Right (g, m)) = printInterrupts m g
+
 printWarnings :: [String] -> IO ()
 printWarnings = mapM_ $ \h -> putStr ("WARNING: " ++ h ++ "\n")
-printResult' (Left msg) = putStr $ "ERROR: " ++ msg
-printResult' (Right m) = printProgram m >> printInterrupt m
 
-printProgram :: M.Map Label Int -> IO ()
-printProgram = printKey "__sdcc_program_startup"
+printInterrupts :: M.Map Label Int -> Graph -> IO ()
+printInterrupts m g = mapM_ (printKey m) (interruptsKeys g)
 
-printInterrupt :: M.Map Label Int -> IO ()
-printInterrupt = printKey "__interrupts"
+interruptsKeys :: Graph -> [Label]
+interruptsKeys = catMaybes . (map edgeTo) . (fromMaybe []) . (fmap edges) . (find (("__interrupt_vect"==) . label))
 
-printKey :: Label -> M.Map Label Int -> IO ()
-printKey k m = putStr $ (show k) ++ ": " ++ res ++ "\n" where
+printKey :: M.Map Label Int -> Label -> IO ()
+printKey m k = putStr $ (show k) ++ ": " ++ res ++ "\n" where
     res = fromMaybe "--" (show <$> (M.lookup k m))
 
-printProg :: Program -> IO ()
-printProg = printResult . doAnal
+printProgX :: Program -> IO ()
+printProgX = printResultX . doAnalX
 
 main = do
     args <- getArgs
     case args of
-        [] -> getContents >>= printProg . asm . lexer
+        [] -> getContents >>= printProgX . asm . lexer
         _:_:t -> fail "Too many arguments"
-        [a] -> readFile a >>= printProg . asm . lexer
+        [a] -> readFile a >>= printProgX . asm . lexer
 
