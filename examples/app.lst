@@ -1,0 +1,1291 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.0 #7066 (Jun 14 2012) (Linux)
+                              4 ; This file was generated Mon Jun 10 16:52:16 2013
+                              5 ;--------------------------------------------------------
+                              6 	.module app
+                              7 	.optsdcc -mmcs51 --model-large
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _SIG_INTERRUPT0
+                             13 	.globl _tomekfun
+                             14 	.globl _memset
+                             15 	.globl _P1_3
+                             16 	.globl _P1_0
+                             17 	.globl _EA
+                             18 	.globl _P1_DIR
+                             19 	.globl _CLKCON
+                             20 	.globl _SLEEP
+                             21 	.globl _tomekfun_PARM_2
+                             22 	.globl _test3
+                             23 	.globl _test2
+                             24 	.globl _test1
+                             25 	.globl _BlinkNoTimerTaskC__cntr
+                             26 	.globl _SchedulerBasicP__m_next
+                             27 	.globl _SchedulerBasicP__m_tail
+                             28 	.globl _SchedulerBasicP__m_head
+                             29 	.globl ___nesc_atomic_start
+                             30 	.globl ___nesc_atomic_end
+                             31 	.globl _main
+                             32 ;--------------------------------------------------------
+                             33 ; special function registers
+                             34 ;--------------------------------------------------------
+                             35 	.area RSEG    (ABS,DATA)
+   0000                      36 	.org 0x0000
+                    00BE     37 _SLEEP	=	0x00be
+                    00C6     38 _CLKCON	=	0x00c6
+                    00FE     39 _P1_DIR	=	0x00fe
+                             40 ;--------------------------------------------------------
+                             41 ; special function bits
+                             42 ;--------------------------------------------------------
+                             43 	.area RSEG    (ABS,DATA)
+   0000                      44 	.org 0x0000
+                    00AF     45 _EA	=	0x00af
+                    0090     46 _P1_0	=	0x0090
+                    0093     47 _P1_3	=	0x0093
+                             48 ;--------------------------------------------------------
+                             49 ; overlayable register banks
+                             50 ;--------------------------------------------------------
+                             51 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                      52 	.ds 8
+                             53 ;--------------------------------------------------------
+                             54 ; internal ram data
+                             55 ;--------------------------------------------------------
+                             56 	.area DSEG    (DATA)
+                             57 ;--------------------------------------------------------
+                             58 ; overlayable items in internal ram 
+                             59 ;--------------------------------------------------------
+                             60 	.area OSEG    (OVR,DATA)
+                             61 ;--------------------------------------------------------
+                             62 ; Stack segment in internal ram 
+                             63 ;--------------------------------------------------------
+                             64 	.area	SSEG	(DATA)
+   0000                      65 __start__stack:
+   0000                      66 	.ds	1
+                             67 
+                             68 ;--------------------------------------------------------
+                             69 ; indirectly addressable internal ram data
+                             70 ;--------------------------------------------------------
+                             71 	.area ISEG    (DATA)
+                             72 ;--------------------------------------------------------
+                             73 ; absolute internal ram data
+                             74 ;--------------------------------------------------------
+                             75 	.area IABS    (ABS,DATA)
+                             76 	.area IABS    (ABS,DATA)
+                             77 ;--------------------------------------------------------
+                             78 ; bit data
+                             79 ;--------------------------------------------------------
+                             80 	.area BSEG    (BIT)
+                             81 ;--------------------------------------------------------
+                             82 ; paged external ram data
+                             83 ;--------------------------------------------------------
+                             84 	.area PSEG    (PAG,XDATA)
+                             85 ;--------------------------------------------------------
+                             86 ; external ram data
+                             87 ;--------------------------------------------------------
+                             88 	.area XSEG    (XDATA)
+   0000                      89 _SchedulerBasicP__m_head::
+   0000                      90 	.ds 1
+   0001                      91 _SchedulerBasicP__m_tail::
+   0001                      92 	.ds 1
+   0002                      93 _SchedulerBasicP__m_next::
+   0002                      94 	.ds 2
+   0004                      95 _BlinkNoTimerTaskC__cntr::
+   0004                      96 	.ds 2
+   0006                      97 ___nesc_atomic_end_oldSreg_1_1:
+   0006                      98 	.ds 1
+   0007                      99 _SchedulerBasicP__isWaiting_id_1_1:
+   0007                     100 	.ds 1
+   0008                     101 _SchedulerBasicP__pushTask_id_1_1:
+   0008                     102 	.ds 1
+   0009                     103 _test1::
+   0009                     104 	.ds 1
+   000A                     105 _test2::
+   000A                     106 	.ds 1
+   000B                     107 _test3::
+   000B                     108 	.ds 1
+   000C                     109 _tomekfun_PARM_2:
+   000C                     110 	.ds 1
+   000D                     111 _tomekfun_v1_1_1:
+   000D                     112 	.ds 1
+   000E                     113 _SchedulerBasicP__TaskBasic__runTask_arg_0x2ace41fc53c8_1_1:
+   000E                     114 	.ds 1
+   000F                     115 _SchedulerBasicP__TaskBasic__postTask_id_1_1:
+   000F                     116 	.ds 1
+                            117 ;--------------------------------------------------------
+                            118 ; absolute external ram data
+                            119 ;--------------------------------------------------------
+                            120 	.area XABS    (ABS,XDATA)
+                            121 ;--------------------------------------------------------
+                            122 ; external initialized ram data
+                            123 ;--------------------------------------------------------
+                            124 	.area XISEG   (XDATA)
+                            125 	.area HOME    (CODE)
+                            126 	.area GSINIT0 (CODE)
+                            127 	.area GSINIT1 (CODE)
+                            128 	.area GSINIT2 (CODE)
+                            129 	.area GSINIT3 (CODE)
+                            130 	.area GSINIT4 (CODE)
+                            131 	.area GSINIT5 (CODE)
+                            132 	.area GSINIT  (CODE)
+                            133 	.area GSFINAL (CODE)
+                            134 	.area CSEG    (CODE)
+                            135 ;--------------------------------------------------------
+                            136 ; interrupt vector 
+                            137 ;--------------------------------------------------------
+                            138 	.area HOME    (CODE)
+   0000                     139 __interrupt_vect:
+   0000 02s00r00            140 	ljmp	__sdcc_gsinit_startup
+   0003 02s03r6E            141 	ljmp	_SIG_INTERRUPT0
+                            142 ;--------------------------------------------------------
+                            143 ; global & static initialisations
+                            144 ;--------------------------------------------------------
+                            145 	.area HOME    (CODE)
+                            146 	.area GSINIT  (CODE)
+                            147 	.area GSFINAL (CODE)
+                            148 	.area GSINIT  (CODE)
+                            149 	.globl __sdcc_gsinit_startup
+                            150 	.globl __sdcc_program_startup
+                            151 	.globl __start__stack
+                            152 	.globl __mcs51_genXINIT
+                            153 	.globl __mcs51_genXRAMCLEAR
+                            154 	.globl __mcs51_genRAMCLEAR
+                            155 	.area GSFINAL (CODE)
+   0000 02s00r06            156 	ljmp	__sdcc_program_startup
+                            157 ;--------------------------------------------------------
+                            158 ; Home
+                            159 ;--------------------------------------------------------
+                            160 	.area HOME    (CODE)
+                            161 	.area HOME    (CODE)
+   0006                     162 __sdcc_program_startup:
+   0006 12s02r9C            163 	lcall	_main
+                            164 ;	return from main will lock up
+   0009 80 FE               165 	sjmp .
+                            166 ;--------------------------------------------------------
+                            167 ; code
+                            168 ;--------------------------------------------------------
+                            169 	.area CSEG    (CODE)
+                            170 ;------------------------------------------------------------
+                            171 ;Allocation info for local variables in function '__nesc_atomic_start'
+                            172 ;------------------------------------------------------------
+                            173 ;tmp                       Allocated with name '___nesc_atomic_start_tmp_1_1'
+                            174 ;------------------------------------------------------------
+                            175 ;	-----------------------------------------
+                            176 ;	 function __nesc_atomic_start
+                            177 ;	-----------------------------------------
+   0000                     178 ___nesc_atomic_start:
+                    0007    179 	ar7 = 0x07
+                    0006    180 	ar6 = 0x06
+                    0005    181 	ar5 = 0x05
+                    0004    182 	ar4 = 0x04
+                    0003    183 	ar3 = 0x03
+                    0002    184 	ar2 = 0x02
+                    0001    185 	ar1 = 0x01
+                    0000    186 	ar0 = 0x00
+   0000 A2 AF               187 	mov	c,_EA
+   0002 E4                  188 	clr	a
+   0003 33                  189 	rlc	a
+   0004 FF                  190 	mov	r7,a
+   0005 C2 AF               191 	clr	_EA
+   0007 8F 82               192 	mov	dpl,r7
+   0009 22                  193 	ret
+                            194 ;------------------------------------------------------------
+                            195 ;Allocation info for local variables in function '__nesc_atomic_end'
+                            196 ;------------------------------------------------------------
+                            197 ;oldSreg                   Allocated with name '___nesc_atomic_end_oldSreg_1_1'
+                            198 ;------------------------------------------------------------
+                            199 ;	-----------------------------------------
+                            200 ;	 function __nesc_atomic_end
+                            201 ;	-----------------------------------------
+   000A                     202 ___nesc_atomic_end:
+   000A E5 82               203 	mov	a,dpl
+   000C 90s00r06            204 	mov	dptr,#___nesc_atomic_end_oldSreg_1_1
+   000F F0                  205 	movx	@dptr,a
+   0010 24 FF               206 	add	a,#0xff
+   0012 92 AF               207 	mov	_EA,c
+   0014 22                  208 	ret
+                            209 ;------------------------------------------------------------
+                            210 ;Allocation info for local variables in function 'SchedulerBasicP__Scheduler__init'
+                            211 ;------------------------------------------------------------
+                            212 ;	-----------------------------------------
+                            213 ;	 function SchedulerBasicP__Scheduler__init
+                            214 ;	-----------------------------------------
+   0015                     215 _SchedulerBasicP__Scheduler__init:
+   0015 90s00r00            216 	mov	dptr,#_memset_PARM_2
+   0018 74 FF               217 	mov	a,#0xFF
+   001A F0                  218 	movx	@dptr,a
+   001B 90s00r00            219 	mov	dptr,#_memset_PARM_3
+   001E 74 02               220 	mov	a,#0x02
+   0020 F0                  221 	movx	@dptr,a
+   0021 A3                  222 	inc	dptr
+   0022 E4                  223 	clr	a
+   0023 F0                  224 	movx	@dptr,a
+   0024 90s00r02            225 	mov	dptr,#_SchedulerBasicP__m_next
+   0027 75 F0 00            226 	mov	b,#0x00
+   002A 12s00r00            227 	lcall	_memset
+   002D 90s00r00            228 	mov	dptr,#_SchedulerBasicP__m_head
+   0030 74 FF               229 	mov	a,#0xFF
+   0032 F0                  230 	movx	@dptr,a
+   0033 90s00r01            231 	mov	dptr,#_SchedulerBasicP__m_tail
+   0036 74 FF               232 	mov	a,#0xFF
+   0038 F0                  233 	movx	@dptr,a
+   0039 22                  234 	ret
+                            235 ;------------------------------------------------------------
+                            236 ;Allocation info for local variables in function 'RealMainP__Scheduler__init'
+                            237 ;------------------------------------------------------------
+                            238 ;	-----------------------------------------
+                            239 ;	 function RealMainP__Scheduler__init
+                            240 ;	-----------------------------------------
+   003A                     241 _RealMainP__Scheduler__init:
+   003A 02s00r15            242 	ljmp	_SchedulerBasicP__Scheduler__init
+                            243 ;------------------------------------------------------------
+                            244 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P13__clr'
+                            245 ;------------------------------------------------------------
+                            246 ;	-----------------------------------------
+                            247 ;	 function HplMcs51GeneralIOC__P13__clr
+                            248 ;	-----------------------------------------
+   003D                     249 _HplMcs51GeneralIOC__P13__clr:
+   003D C2 93               250 	clr	_P1_3
+   003F 22                  251 	ret
+                            252 ;------------------------------------------------------------
+                            253 ;Allocation info for local variables in function 'ReverseGPIOP__1__In__clr'
+                            254 ;------------------------------------------------------------
+                            255 ;	-----------------------------------------
+                            256 ;	 function ReverseGPIOP__1__In__clr
+                            257 ;	-----------------------------------------
+   0040                     258 _ReverseGPIOP__1__In__clr:
+   0040 02s00r3D            259 	ljmp	_HplMcs51GeneralIOC__P13__clr
+                            260 ;------------------------------------------------------------
+                            261 ;Allocation info for local variables in function 'ReverseGPIOP__1__Out__set'
+                            262 ;------------------------------------------------------------
+                            263 ;	-----------------------------------------
+                            264 ;	 function ReverseGPIOP__1__Out__set
+                            265 ;	-----------------------------------------
+   0043                     266 _ReverseGPIOP__1__Out__set:
+   0043 02s00r40            267 	ljmp	_ReverseGPIOP__1__In__clr
+                            268 ;------------------------------------------------------------
+                            269 ;Allocation info for local variables in function 'LedsP__Led2__set'
+                            270 ;------------------------------------------------------------
+                            271 ;	-----------------------------------------
+                            272 ;	 function LedsP__Led2__set
+                            273 ;	-----------------------------------------
+   0046                     274 _LedsP__Led2__set:
+   0046 02s00r43            275 	ljmp	_ReverseGPIOP__1__Out__set
+                            276 ;------------------------------------------------------------
+                            277 ;Allocation info for local variables in function 'NoPinC__0__GeneralIO__set'
+                            278 ;------------------------------------------------------------
+                            279 ;	-----------------------------------------
+                            280 ;	 function NoPinC__0__GeneralIO__set
+                            281 ;	-----------------------------------------
+   0049                     282 _NoPinC__0__GeneralIO__set:
+   0049 22                  283 	ret
+                            284 ;------------------------------------------------------------
+                            285 ;Allocation info for local variables in function 'LedsP__Led1__set'
+                            286 ;------------------------------------------------------------
+                            287 ;	-----------------------------------------
+                            288 ;	 function LedsP__Led1__set
+                            289 ;	-----------------------------------------
+   004A                     290 _LedsP__Led1__set:
+   004A 02s00r49            291 	ljmp	_NoPinC__0__GeneralIO__set
+                            292 ;------------------------------------------------------------
+                            293 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P10__clr'
+                            294 ;------------------------------------------------------------
+                            295 ;	-----------------------------------------
+                            296 ;	 function HplMcs51GeneralIOC__P10__clr
+                            297 ;	-----------------------------------------
+   004D                     298 _HplMcs51GeneralIOC__P10__clr:
+   004D C2 90               299 	clr	_P1_0
+   004F 22                  300 	ret
+                            301 ;------------------------------------------------------------
+                            302 ;Allocation info for local variables in function 'ReverseGPIOP__0__In__clr'
+                            303 ;------------------------------------------------------------
+                            304 ;	-----------------------------------------
+                            305 ;	 function ReverseGPIOP__0__In__clr
+                            306 ;	-----------------------------------------
+   0050                     307 _ReverseGPIOP__0__In__clr:
+   0050 02s00r4D            308 	ljmp	_HplMcs51GeneralIOC__P10__clr
+                            309 ;------------------------------------------------------------
+                            310 ;Allocation info for local variables in function 'ReverseGPIOP__0__Out__set'
+                            311 ;------------------------------------------------------------
+                            312 ;	-----------------------------------------
+                            313 ;	 function ReverseGPIOP__0__Out__set
+                            314 ;	-----------------------------------------
+   0053                     315 _ReverseGPIOP__0__Out__set:
+   0053 02s00r50            316 	ljmp	_ReverseGPIOP__0__In__clr
+                            317 ;------------------------------------------------------------
+                            318 ;Allocation info for local variables in function 'LedsP__Led0__set'
+                            319 ;------------------------------------------------------------
+                            320 ;	-----------------------------------------
+                            321 ;	 function LedsP__Led0__set
+                            322 ;	-----------------------------------------
+   0056                     323 _LedsP__Led0__set:
+   0056 02s00r53            324 	ljmp	_ReverseGPIOP__0__Out__set
+                            325 ;------------------------------------------------------------
+                            326 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P13__makeOutput'
+                            327 ;------------------------------------------------------------
+                            328 ;	-----------------------------------------
+                            329 ;	 function HplMcs51GeneralIOC__P13__makeOutput
+                            330 ;	-----------------------------------------
+   0059                     331 _HplMcs51GeneralIOC__P13__makeOutput:
+   0059 43 FE 08            332 	orl	_P1_DIR,#0x08
+   005C 22                  333 	ret
+                            334 ;------------------------------------------------------------
+                            335 ;Allocation info for local variables in function 'ReverseGPIOP__1__In__makeOutput'
+                            336 ;------------------------------------------------------------
+                            337 ;	-----------------------------------------
+                            338 ;	 function ReverseGPIOP__1__In__makeOutput
+                            339 ;	-----------------------------------------
+   005D                     340 _ReverseGPIOP__1__In__makeOutput:
+   005D 02s00r59            341 	ljmp	_HplMcs51GeneralIOC__P13__makeOutput
+                            342 ;------------------------------------------------------------
+                            343 ;Allocation info for local variables in function 'ReverseGPIOP__1__Out__makeOutput'
+                            344 ;------------------------------------------------------------
+                            345 ;	-----------------------------------------
+                            346 ;	 function ReverseGPIOP__1__Out__makeOutput
+                            347 ;	-----------------------------------------
+   0060                     348 _ReverseGPIOP__1__Out__makeOutput:
+   0060 02s00r5D            349 	ljmp	_ReverseGPIOP__1__In__makeOutput
+                            350 ;------------------------------------------------------------
+                            351 ;Allocation info for local variables in function 'LedsP__Led2__makeOutput'
+                            352 ;------------------------------------------------------------
+                            353 ;	-----------------------------------------
+                            354 ;	 function LedsP__Led2__makeOutput
+                            355 ;	-----------------------------------------
+   0063                     356 _LedsP__Led2__makeOutput:
+   0063 02s00r60            357 	ljmp	_ReverseGPIOP__1__Out__makeOutput
+                            358 ;------------------------------------------------------------
+                            359 ;Allocation info for local variables in function 'NoPinC__0__GeneralIO__makeOutput'
+                            360 ;------------------------------------------------------------
+                            361 ;	-----------------------------------------
+                            362 ;	 function NoPinC__0__GeneralIO__makeOutput
+                            363 ;	-----------------------------------------
+   0066                     364 _NoPinC__0__GeneralIO__makeOutput:
+   0066 22                  365 	ret
+                            366 ;------------------------------------------------------------
+                            367 ;Allocation info for local variables in function 'LedsP__Led1__makeOutput'
+                            368 ;------------------------------------------------------------
+                            369 ;	-----------------------------------------
+                            370 ;	 function LedsP__Led1__makeOutput
+                            371 ;	-----------------------------------------
+   0067                     372 _LedsP__Led1__makeOutput:
+   0067 02s00r66            373 	ljmp	_NoPinC__0__GeneralIO__makeOutput
+                            374 ;------------------------------------------------------------
+                            375 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P10__makeOutput'
+                            376 ;------------------------------------------------------------
+                            377 ;	-----------------------------------------
+                            378 ;	 function HplMcs51GeneralIOC__P10__makeOutput
+                            379 ;	-----------------------------------------
+   006A                     380 _HplMcs51GeneralIOC__P10__makeOutput:
+   006A 43 FE 01            381 	orl	_P1_DIR,#0x01
+   006D 22                  382 	ret
+                            383 ;------------------------------------------------------------
+                            384 ;Allocation info for local variables in function 'ReverseGPIOP__0__In__makeOutput'
+                            385 ;------------------------------------------------------------
+                            386 ;	-----------------------------------------
+                            387 ;	 function ReverseGPIOP__0__In__makeOutput
+                            388 ;	-----------------------------------------
+   006E                     389 _ReverseGPIOP__0__In__makeOutput:
+   006E 02s00r6A            390 	ljmp	_HplMcs51GeneralIOC__P10__makeOutput
+                            391 ;------------------------------------------------------------
+                            392 ;Allocation info for local variables in function 'ReverseGPIOP__0__Out__makeOutput'
+                            393 ;------------------------------------------------------------
+                            394 ;	-----------------------------------------
+                            395 ;	 function ReverseGPIOP__0__Out__makeOutput
+                            396 ;	-----------------------------------------
+   0071                     397 _ReverseGPIOP__0__Out__makeOutput:
+   0071 02s00r6E            398 	ljmp	_ReverseGPIOP__0__In__makeOutput
+                            399 ;------------------------------------------------------------
+                            400 ;Allocation info for local variables in function 'LedsP__Led0__makeOutput'
+                            401 ;------------------------------------------------------------
+                            402 ;	-----------------------------------------
+                            403 ;	 function LedsP__Led0__makeOutput
+                            404 ;	-----------------------------------------
+   0074                     405 _LedsP__Led0__makeOutput:
+   0074 02s00r71            406 	ljmp	_ReverseGPIOP__0__Out__makeOutput
+                            407 ;------------------------------------------------------------
+                            408 ;Allocation info for local variables in function 'LedsP__Init__init'
+                            409 ;------------------------------------------------------------
+                            410 ;	-----------------------------------------
+                            411 ;	 function LedsP__Init__init
+                            412 ;	-----------------------------------------
+   0077                     413 _LedsP__Init__init:
+   0077 12s00r74            414 	lcall	_LedsP__Led0__makeOutput
+   007A 12s00r67            415 	lcall	_LedsP__Led1__makeOutput
+   007D 12s00r63            416 	lcall	_LedsP__Led2__makeOutput
+   0080 12s00r56            417 	lcall	_LedsP__Led0__set
+   0083 12s00r4A            418 	lcall	_LedsP__Led1__set
+   0086 12s00r46            419 	lcall	_LedsP__Led2__set
+   0089 75 82 00            420 	mov	dpl,#0x00
+   008C 22                  421 	ret
+                            422 ;------------------------------------------------------------
+                            423 ;Allocation info for local variables in function 'PlatformP__LedsInit__init'
+                            424 ;------------------------------------------------------------
+                            425 ;__nesc_result             Allocated with name '_PlatformP__LedsInit__init___nesc_result_1_1'
+                            426 ;------------------------------------------------------------
+                            427 ;	-----------------------------------------
+                            428 ;	 function PlatformP__LedsInit__init
+                            429 ;	-----------------------------------------
+   008D                     430 _PlatformP__LedsInit__init:
+   008D 02s00r77            431 	ljmp	_LedsP__Init__init
+                            432 ;------------------------------------------------------------
+                            433 ;Allocation info for local variables in function 'PlatformP__Init__init'
+                            434 ;------------------------------------------------------------
+                            435 ;new_clkcon                Allocated with name '_PlatformP__Init__init_new_clkcon_1_1'
+                            436 ;------------------------------------------------------------
+                            437 ;	-----------------------------------------
+                            438 ;	 function PlatformP__Init__init
+                            439 ;	-----------------------------------------
+   0090                     440 _PlatformP__Init__init:
+   0090 AF BE               441 	mov	r7,_SLEEP
+   0092 53 07 FC            442 	anl	ar7,#0xFC
+   0095 8F BE               443 	mov	_SLEEP,r7
+   0097 AF BE               444 	mov	r7,_SLEEP
+   0099 53 07 FB            445 	anl	ar7,#0xFB
+   009C 8F BE               446 	mov	_SLEEP,r7
+   009E                     447 00101$:
+   009E E5 BE               448 	mov	a,_SLEEP
+   00A0 30 E6 FB            449 	jnb	acc.6,00101$
+   00A3 75 C6 08            450 	mov	_CLKCON,#0x08
+   00A6 12s00r8D            451 	lcall	_PlatformP__LedsInit__init
+   00A9 75 82 00            452 	mov	dpl,#0x00
+   00AC 22                  453 	ret
+                            454 ;------------------------------------------------------------
+                            455 ;Allocation info for local variables in function 'RealMainP__PlatformInit__init'
+                            456 ;------------------------------------------------------------
+                            457 ;__nesc_result             Allocated with name '_RealMainP__PlatformInit__init___nesc_result_1_1'
+                            458 ;------------------------------------------------------------
+                            459 ;	-----------------------------------------
+                            460 ;	 function RealMainP__PlatformInit__init
+                            461 ;	-----------------------------------------
+   00AD                     462 _RealMainP__PlatformInit__init:
+   00AD 02s00r90            463 	ljmp	_PlatformP__Init__init
+                            464 ;------------------------------------------------------------
+                            465 ;Allocation info for local variables in function 'RealMainP__Scheduler__runNextTask'
+                            466 ;------------------------------------------------------------
+                            467 ;__nesc_result             Allocated with name '_RealMainP__Scheduler__runNextTask___nesc_result_1_1'
+                            468 ;------------------------------------------------------------
+                            469 ;	-----------------------------------------
+                            470 ;	 function RealMainP__Scheduler__runNextTask
+                            471 ;	-----------------------------------------
+   00B0                     472 _RealMainP__Scheduler__runNextTask:
+   00B0 02s02rDA            473 	ljmp	_SchedulerBasicP__Scheduler__runNextTask
+                            474 ;------------------------------------------------------------
+                            475 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__toggle__postTask'
+                            476 ;------------------------------------------------------------
+                            477 ;__nesc_result             Allocated with name '_BlinkNoTimerTaskC__toggle__postTask___nesc_result_1_1'
+                            478 ;------------------------------------------------------------
+                            479 ;	-----------------------------------------
+                            480 ;	 function BlinkNoTimerTaskC__toggle__postTask
+                            481 ;	-----------------------------------------
+   00B3                     482 _BlinkNoTimerTaskC__toggle__postTask:
+   00B3 75 82 00            483 	mov	dpl,#0x00
+   00B6 02s03r16            484 	ljmp	_SchedulerBasicP__TaskBasic__postTask
+                            485 ;------------------------------------------------------------
+                            486 ;Allocation info for local variables in function 'SchedulerBasicP__isWaiting'
+                            487 ;------------------------------------------------------------
+                            488 ;id                        Allocated with name '_SchedulerBasicP__isWaiting_id_1_1'
+                            489 ;------------------------------------------------------------
+                            490 ;	-----------------------------------------
+                            491 ;	 function SchedulerBasicP__isWaiting
+                            492 ;	-----------------------------------------
+   00B9                     493 _SchedulerBasicP__isWaiting:
+   00B9 E5 82               494 	mov	a,dpl
+   00BB 90s00r07            495 	mov	dptr,#_SchedulerBasicP__isWaiting_id_1_1
+   00BE F0                  496 	movx	@dptr,a
+   00BF FF                  497 	mov	r7,a
+   00C0 24r02               498 	add	a,#_SchedulerBasicP__m_next
+   00C2 F5 82               499 	mov	dpl,a
+   00C4 E4                  500 	clr	a
+   00C5 34s00               501 	addc	a,#(_SchedulerBasicP__m_next >> 8)
+   00C7 F5 83               502 	mov	dph,a
+   00C9 E0                  503 	movx	a,@dptr
+   00CA FE                  504 	mov	r6,a
+   00CB E4                  505 	clr	a
+   00CC BE FF 01            506 	cjne	r6,#0xFF,00108$
+   00CF 04                  507 	inc	a
+   00D0                     508 00108$:
+   00D0 FE                  509 	mov	r6,a
+   00D1 B4 01 00            510 	cjne	a,#0x01,00110$
+   00D4                     511 00110$:
+   00D4 E4                  512 	clr	a
+   00D5 33                  513 	rlc	a
+   00D6 FE                  514 	mov	r6,a
+   00D7 70 0E               515 	jnz	00104$
+   00D9 90s00r01            516 	mov	dptr,#_SchedulerBasicP__m_tail
+   00DC E0                  517 	movx	a,@dptr
+   00DD FE                  518 	mov	r6,a
+   00DE B5 07 02            519 	cjne	a,ar7,00112$
+   00E1 80 04               520 	sjmp	00104$
+   00E3                     521 00112$:
+   00E3 7F 00               522 	mov	r7,#0x00
+   00E5 80 02               523 	sjmp	00105$
+   00E7                     524 00104$:
+   00E7 7F 01               525 	mov	r7,#0x01
+   00E9                     526 00105$:
+   00E9 8F 82               527 	mov	dpl,r7
+   00EB 22                  528 	ret
+                            529 ;------------------------------------------------------------
+                            530 ;Allocation info for local variables in function 'SchedulerBasicP__pushTask'
+                            531 ;------------------------------------------------------------
+                            532 ;id                        Allocated with name '_SchedulerBasicP__pushTask_id_1_1'
+                            533 ;------------------------------------------------------------
+                            534 ;	-----------------------------------------
+                            535 ;	 function SchedulerBasicP__pushTask
+                            536 ;	-----------------------------------------
+   00EC                     537 _SchedulerBasicP__pushTask:
+   00EC E5 82               538 	mov	a,dpl
+   00EE 90s00r08            539 	mov	dptr,#_SchedulerBasicP__pushTask_id_1_1
+   00F1 F0                  540 	movx	@dptr,a
+   00F2 FF                  541 	mov	r7,a
+   00F3 F5 82               542 	mov	dpl,a
+   00F5 C0 07               543 	push	ar7
+   00F7 12s00rB9            544 	lcall	_SchedulerBasicP__isWaiting
+   00FA E5 82               545 	mov	a,dpl
+   00FC D0 07               546 	pop	ar7
+   00FE 70 2D               547 	jnz	00105$
+   0100 90s00r00            548 	mov	dptr,#_SchedulerBasicP__m_head
+   0103 E0                  549 	movx	a,@dptr
+   0104 FE                  550 	mov	r6,a
+   0105 BE FF 0C            551 	cjne	r6,#0xFF,00102$
+   0108 90s00r00            552 	mov	dptr,#_SchedulerBasicP__m_head
+   010B EF                  553 	mov	a,r7
+   010C F0                  554 	movx	@dptr,a
+   010D 90s00r01            555 	mov	dptr,#_SchedulerBasicP__m_tail
+   0110 EF                  556 	mov	a,r7
+   0111 F0                  557 	movx	@dptr,a
+   0112 80 15               558 	sjmp	00103$
+   0114                     559 00102$:
+   0114 90s00r01            560 	mov	dptr,#_SchedulerBasicP__m_tail
+   0117 E0                  561 	movx	a,@dptr
+   0118 FE                  562 	mov	r6,a
+   0119 24r02               563 	add	a,#_SchedulerBasicP__m_next
+   011B F5 82               564 	mov	dpl,a
+   011D E4                  565 	clr	a
+   011E 34s00               566 	addc	a,#(_SchedulerBasicP__m_next >> 8)
+   0120 F5 83               567 	mov	dph,a
+   0122 EF                  568 	mov	a,r7
+   0123 F0                  569 	movx	@dptr,a
+   0124 90s00r01            570 	mov	dptr,#_SchedulerBasicP__m_tail
+   0127 EF                  571 	mov	a,r7
+   0128 F0                  572 	movx	@dptr,a
+   0129                     573 00103$:
+   0129 75 82 01            574 	mov	dpl,#0x01
+   012C 22                  575 	ret
+   012D                     576 00105$:
+   012D 75 82 00            577 	mov	dpl,#0x00
+   0130 22                  578 	ret
+                            579 ;------------------------------------------------------------
+                            580 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P10__toggle'
+                            581 ;------------------------------------------------------------
+                            582 ;	-----------------------------------------
+                            583 ;	 function HplMcs51GeneralIOC__P10__toggle
+                            584 ;	-----------------------------------------
+   0131                     585 _HplMcs51GeneralIOC__P10__toggle:
+   0131 D2 90               586 	setb	_P1_0
+   0133 22                  587 	ret
+                            588 ;------------------------------------------------------------
+                            589 ;Allocation info for local variables in function 'ReverseGPIOP__0__In__toggle'
+                            590 ;------------------------------------------------------------
+                            591 ;	-----------------------------------------
+                            592 ;	 function ReverseGPIOP__0__In__toggle
+                            593 ;	-----------------------------------------
+   0134                     594 _ReverseGPIOP__0__In__toggle:
+   0134 02s01r31            595 	ljmp	_HplMcs51GeneralIOC__P10__toggle
+                            596 ;------------------------------------------------------------
+                            597 ;Allocation info for local variables in function 'ReverseGPIOP__0__Out__toggle'
+                            598 ;------------------------------------------------------------
+                            599 ;__nesc_atomic             Allocated with name '_ReverseGPIOP__0__Out__toggle___nesc_atomic_2_2'
+                            600 ;------------------------------------------------------------
+                            601 ;	-----------------------------------------
+                            602 ;	 function ReverseGPIOP__0__Out__toggle
+                            603 ;	-----------------------------------------
+   0137                     604 _ReverseGPIOP__0__Out__toggle:
+   0137 12s00r00            605 	lcall	___nesc_atomic_start
+   013A AF 82               606 	mov	r7,dpl
+   013C C0 07               607 	push	ar7
+   013E 12s01r34            608 	lcall	_ReverseGPIOP__0__In__toggle
+   0141 D0 07               609 	pop	ar7
+   0143 8F 82               610 	mov	dpl,r7
+   0145 02s00r0A            611 	ljmp	___nesc_atomic_end
+                            612 ;------------------------------------------------------------
+                            613 ;Allocation info for local variables in function 'LedsP__Led0__toggle'
+                            614 ;------------------------------------------------------------
+                            615 ;	-----------------------------------------
+                            616 ;	 function LedsP__Led0__toggle
+                            617 ;	-----------------------------------------
+   0148                     618 _LedsP__Led0__toggle:
+   0148 02s01r37            619 	ljmp	_ReverseGPIOP__0__Out__toggle
+                            620 ;------------------------------------------------------------
+                            621 ;Allocation info for local variables in function 'LedsP__Leds__led0Toggle'
+                            622 ;------------------------------------------------------------
+                            623 ;	-----------------------------------------
+                            624 ;	 function LedsP__Leds__led0Toggle
+                            625 ;	-----------------------------------------
+   014B                     626 _LedsP__Leds__led0Toggle:
+   014B 02s01r48            627 	ljmp	_LedsP__Led0__toggle
+                            628 ;------------------------------------------------------------
+                            629 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__Leds__led0Toggle'
+                            630 ;------------------------------------------------------------
+                            631 ;	-----------------------------------------
+                            632 ;	 function BlinkNoTimerTaskC__Leds__led0Toggle
+                            633 ;	-----------------------------------------
+   014E                     634 _BlinkNoTimerTaskC__Leds__led0Toggle:
+   014E 02s01r4B            635 	ljmp	_LedsP__Leds__led0Toggle
+                            636 ;------------------------------------------------------------
+                            637 ;Allocation info for local variables in function 'NoPinC__0__GeneralIO__toggle'
+                            638 ;------------------------------------------------------------
+                            639 ;	-----------------------------------------
+                            640 ;	 function NoPinC__0__GeneralIO__toggle
+                            641 ;	-----------------------------------------
+   0151                     642 _NoPinC__0__GeneralIO__toggle:
+   0151 22                  643 	ret
+                            644 ;------------------------------------------------------------
+                            645 ;Allocation info for local variables in function 'LedsP__Led1__toggle'
+                            646 ;------------------------------------------------------------
+                            647 ;	-----------------------------------------
+                            648 ;	 function LedsP__Led1__toggle
+                            649 ;	-----------------------------------------
+   0152                     650 _LedsP__Led1__toggle:
+   0152 02s01r51            651 	ljmp	_NoPinC__0__GeneralIO__toggle
+                            652 ;------------------------------------------------------------
+                            653 ;Allocation info for local variables in function 'LedsP__Leds__led1Toggle'
+                            654 ;------------------------------------------------------------
+                            655 ;	-----------------------------------------
+                            656 ;	 function LedsP__Leds__led1Toggle
+                            657 ;	-----------------------------------------
+   0155                     658 _LedsP__Leds__led1Toggle:
+   0155 02s01r52            659 	ljmp	_LedsP__Led1__toggle
+                            660 ;------------------------------------------------------------
+                            661 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__Leds__led1Toggle'
+                            662 ;------------------------------------------------------------
+                            663 ;	-----------------------------------------
+                            664 ;	 function BlinkNoTimerTaskC__Leds__led1Toggle
+                            665 ;	-----------------------------------------
+   0158                     666 _BlinkNoTimerTaskC__Leds__led1Toggle:
+   0158 02s01r55            667 	ljmp	_LedsP__Leds__led1Toggle
+                            668 ;------------------------------------------------------------
+                            669 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P13__toggle'
+                            670 ;------------------------------------------------------------
+                            671 ;	-----------------------------------------
+                            672 ;	 function HplMcs51GeneralIOC__P13__toggle
+                            673 ;	-----------------------------------------
+   015B                     674 _HplMcs51GeneralIOC__P13__toggle:
+   015B D2 93               675 	setb	_P1_3
+   015D 22                  676 	ret
+                            677 ;------------------------------------------------------------
+                            678 ;Allocation info for local variables in function 'ReverseGPIOP__1__In__toggle'
+                            679 ;------------------------------------------------------------
+                            680 ;	-----------------------------------------
+                            681 ;	 function ReverseGPIOP__1__In__toggle
+                            682 ;	-----------------------------------------
+   015E                     683 _ReverseGPIOP__1__In__toggle:
+   015E 02s01r5B            684 	ljmp	_HplMcs51GeneralIOC__P13__toggle
+                            685 ;------------------------------------------------------------
+                            686 ;Allocation info for local variables in function 'ReverseGPIOP__1__Out__toggle'
+                            687 ;------------------------------------------------------------
+                            688 ;__nesc_atomic             Allocated with name '_ReverseGPIOP__1__Out__toggle___nesc_atomic_2_2'
+                            689 ;------------------------------------------------------------
+                            690 ;	-----------------------------------------
+                            691 ;	 function ReverseGPIOP__1__Out__toggle
+                            692 ;	-----------------------------------------
+   0161                     693 _ReverseGPIOP__1__Out__toggle:
+   0161 12s00r00            694 	lcall	___nesc_atomic_start
+   0164 AF 82               695 	mov	r7,dpl
+   0166 C0 07               696 	push	ar7
+   0168 12s01r5E            697 	lcall	_ReverseGPIOP__1__In__toggle
+   016B D0 07               698 	pop	ar7
+   016D 8F 82               699 	mov	dpl,r7
+   016F 02s00r0A            700 	ljmp	___nesc_atomic_end
+                            701 ;------------------------------------------------------------
+                            702 ;Allocation info for local variables in function 'LedsP__Led2__toggle'
+                            703 ;------------------------------------------------------------
+                            704 ;	-----------------------------------------
+                            705 ;	 function LedsP__Led2__toggle
+                            706 ;	-----------------------------------------
+   0172                     707 _LedsP__Led2__toggle:
+   0172 02s01r61            708 	ljmp	_ReverseGPIOP__1__Out__toggle
+                            709 ;------------------------------------------------------------
+                            710 ;Allocation info for local variables in function 'LedsP__Leds__led2Toggle'
+                            711 ;------------------------------------------------------------
+                            712 ;	-----------------------------------------
+                            713 ;	 function LedsP__Leds__led2Toggle
+                            714 ;	-----------------------------------------
+   0175                     715 _LedsP__Leds__led2Toggle:
+   0175 02s01r72            716 	ljmp	_LedsP__Led2__toggle
+                            717 ;------------------------------------------------------------
+                            718 ;Allocation info for local variables in function 'tomekfun'
+                            719 ;------------------------------------------------------------
+                            720 ;v2                        Allocated with name '_tomekfun_PARM_2'
+                            721 ;v1                        Allocated with name '_tomekfun_v1_1_1'
+                            722 ;------------------------------------------------------------
+                            723 ;	-----------------------------------------
+                            724 ;	 function tomekfun
+                            725 ;	-----------------------------------------
+   0178                     726 _tomekfun:
+   0178 E5 82               727 	mov	a,dpl
+   017A 90s00r0D            728 	mov	dptr,#_tomekfun_v1_1_1
+   017D F0                  729 	movx	@dptr,a
+   017E 90s00r0C            730 	mov	dptr,#_tomekfun_PARM_2
+   0181 E0                  731 	movx	a,@dptr
+   0182 FF                  732 	mov	r7,a
+   0183 90s00r0D            733 	mov	dptr,#_tomekfun_v1_1_1
+   0186 E0                  734 	movx	a,@dptr
+   0187 2F                  735 	add	a,r7
+   0188 F5 82               736 	mov	dpl,a
+   018A 22                  737 	ret
+                            738 ;------------------------------------------------------------
+                            739 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__Leds__led2Toggle'
+                            740 ;------------------------------------------------------------
+                            741 ;tomektest                 Allocated with name '_BlinkNoTimerTaskC__Leds__led2Toggle_tomektest_1_1'
+                            742 ;------------------------------------------------------------
+                            743 ;	-----------------------------------------
+                            744 ;	 function BlinkNoTimerTaskC__Leds__led2Toggle
+                            745 ;	-----------------------------------------
+   018B                     746 _BlinkNoTimerTaskC__Leds__led2Toggle:
+   018B 90s00r09            747 	mov	dptr,#_test1
+   018E E0                  748 	movx	a,@dptr
+   018F FF                  749 	mov	r7,a
+   0190 90s00r0A            750 	mov	dptr,#_test2
+   0193 E0                  751 	movx	a,@dptr
+   0194 90s00r0C            752 	mov	dptr,#_tomekfun_PARM_2
+   0197 F0                  753 	movx	@dptr,a
+   0198 8F 82               754 	mov	dpl,r7
+   019A 12s01r78            755 	lcall	_tomekfun
+   019D E5 82               756 	mov	a,dpl
+   019F 90s00r0B            757 	mov	dptr,#_test3
+   01A2 F0                  758 	movx	@dptr,a
+   01A3 02s01r75            759 	ljmp	_LedsP__Leds__led2Toggle
+                            760 ;------------------------------------------------------------
+                            761 ;Allocation info for local variables in function 'RealMainP__SoftwareInit__default__init'
+                            762 ;------------------------------------------------------------
+                            763 ;	-----------------------------------------
+                            764 ;	 function RealMainP__SoftwareInit__default__init
+                            765 ;	-----------------------------------------
+   01A6                     766 _RealMainP__SoftwareInit__default__init:
+   01A6 75 82 00            767 	mov	dpl,#0x00
+   01A9 22                  768 	ret
+                            769 ;------------------------------------------------------------
+                            770 ;Allocation info for local variables in function 'RealMainP__SoftwareInit__init'
+                            771 ;------------------------------------------------------------
+                            772 ;__nesc_result             Allocated with name '_RealMainP__SoftwareInit__init___nesc_result_1_1'
+                            773 ;------------------------------------------------------------
+                            774 ;	-----------------------------------------
+                            775 ;	 function RealMainP__SoftwareInit__init
+                            776 ;	-----------------------------------------
+   01AA                     777 _RealMainP__SoftwareInit__init:
+   01AA 02s01rA6            778 	ljmp	_RealMainP__SoftwareInit__default__init
+                            779 ;------------------------------------------------------------
+                            780 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__delay__postTask'
+                            781 ;------------------------------------------------------------
+                            782 ;__nesc_result             Allocated with name '_BlinkNoTimerTaskC__delay__postTask___nesc_result_1_1'
+                            783 ;------------------------------------------------------------
+                            784 ;	-----------------------------------------
+                            785 ;	 function BlinkNoTimerTaskC__delay__postTask
+                            786 ;	-----------------------------------------
+   01AD                     787 _BlinkNoTimerTaskC__delay__postTask:
+   01AD 75 82 01            788 	mov	dpl,#0x01
+   01B0 02s03r16            789 	ljmp	_SchedulerBasicP__TaskBasic__postTask
+                            790 ;------------------------------------------------------------
+                            791 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P13__set'
+                            792 ;------------------------------------------------------------
+                            793 ;	-----------------------------------------
+                            794 ;	 function HplMcs51GeneralIOC__P13__set
+                            795 ;	-----------------------------------------
+   01B3                     796 _HplMcs51GeneralIOC__P13__set:
+   01B3 D2 93               797 	setb	_P1_3
+   01B5 22                  798 	ret
+                            799 ;------------------------------------------------------------
+                            800 ;Allocation info for local variables in function 'ReverseGPIOP__1__In__set'
+                            801 ;------------------------------------------------------------
+                            802 ;	-----------------------------------------
+                            803 ;	 function ReverseGPIOP__1__In__set
+                            804 ;	-----------------------------------------
+   01B6                     805 _ReverseGPIOP__1__In__set:
+   01B6 02s01rB3            806 	ljmp	_HplMcs51GeneralIOC__P13__set
+                            807 ;------------------------------------------------------------
+                            808 ;Allocation info for local variables in function 'ReverseGPIOP__1__Out__clr'
+                            809 ;------------------------------------------------------------
+                            810 ;	-----------------------------------------
+                            811 ;	 function ReverseGPIOP__1__Out__clr
+                            812 ;	-----------------------------------------
+   01B9                     813 _ReverseGPIOP__1__Out__clr:
+   01B9 02s01rB6            814 	ljmp	_ReverseGPIOP__1__In__set
+                            815 ;------------------------------------------------------------
+                            816 ;Allocation info for local variables in function 'LedsP__Led2__clr'
+                            817 ;------------------------------------------------------------
+                            818 ;	-----------------------------------------
+                            819 ;	 function LedsP__Led2__clr
+                            820 ;	-----------------------------------------
+   01BC                     821 _LedsP__Led2__clr:
+   01BC 02s01rB9            822 	ljmp	_ReverseGPIOP__1__Out__clr
+                            823 ;------------------------------------------------------------
+                            824 ;Allocation info for local variables in function 'LedsP__Leds__led2On'
+                            825 ;------------------------------------------------------------
+                            826 ;	-----------------------------------------
+                            827 ;	 function LedsP__Leds__led2On
+                            828 ;	-----------------------------------------
+   01BF                     829 _LedsP__Leds__led2On:
+   01BF 02s01rBC            830 	ljmp	_LedsP__Led2__clr
+                            831 ;------------------------------------------------------------
+                            832 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__Leds__led2On'
+                            833 ;------------------------------------------------------------
+                            834 ;	-----------------------------------------
+                            835 ;	 function BlinkNoTimerTaskC__Leds__led2On
+                            836 ;	-----------------------------------------
+   01C2                     837 _BlinkNoTimerTaskC__Leds__led2On:
+   01C2 02s01rBF            838 	ljmp	_LedsP__Leds__led2On
+                            839 ;------------------------------------------------------------
+                            840 ;Allocation info for local variables in function 'NoPinC__0__GeneralIO__clr'
+                            841 ;------------------------------------------------------------
+                            842 ;	-----------------------------------------
+                            843 ;	 function NoPinC__0__GeneralIO__clr
+                            844 ;	-----------------------------------------
+   01C5                     845 _NoPinC__0__GeneralIO__clr:
+   01C5 22                  846 	ret
+                            847 ;------------------------------------------------------------
+                            848 ;Allocation info for local variables in function 'LedsP__Led1__clr'
+                            849 ;------------------------------------------------------------
+                            850 ;	-----------------------------------------
+                            851 ;	 function LedsP__Led1__clr
+                            852 ;	-----------------------------------------
+   01C6                     853 _LedsP__Led1__clr:
+   01C6 02s01rC5            854 	ljmp	_NoPinC__0__GeneralIO__clr
+                            855 ;------------------------------------------------------------
+                            856 ;Allocation info for local variables in function 'LedsP__Leds__led1On'
+                            857 ;------------------------------------------------------------
+                            858 ;	-----------------------------------------
+                            859 ;	 function LedsP__Leds__led1On
+                            860 ;	-----------------------------------------
+   01C9                     861 _LedsP__Leds__led1On:
+   01C9 02s01rC6            862 	ljmp	_LedsP__Led1__clr
+                            863 ;------------------------------------------------------------
+                            864 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__Leds__led1On'
+                            865 ;------------------------------------------------------------
+                            866 ;	-----------------------------------------
+                            867 ;	 function BlinkNoTimerTaskC__Leds__led1On
+                            868 ;	-----------------------------------------
+   01CC                     869 _BlinkNoTimerTaskC__Leds__led1On:
+   01CC 02s01rC9            870 	ljmp	_LedsP__Leds__led1On
+                            871 ;------------------------------------------------------------
+                            872 ;Allocation info for local variables in function 'HplMcs51GeneralIOC__P10__set'
+                            873 ;------------------------------------------------------------
+                            874 ;	-----------------------------------------
+                            875 ;	 function HplMcs51GeneralIOC__P10__set
+                            876 ;	-----------------------------------------
+   01CF                     877 _HplMcs51GeneralIOC__P10__set:
+   01CF D2 90               878 	setb	_P1_0
+   01D1 22                  879 	ret
+                            880 ;------------------------------------------------------------
+                            881 ;Allocation info for local variables in function 'ReverseGPIOP__0__In__set'
+                            882 ;------------------------------------------------------------
+                            883 ;	-----------------------------------------
+                            884 ;	 function ReverseGPIOP__0__In__set
+                            885 ;	-----------------------------------------
+   01D2                     886 _ReverseGPIOP__0__In__set:
+   01D2 02s01rCF            887 	ljmp	_HplMcs51GeneralIOC__P10__set
+                            888 ;------------------------------------------------------------
+                            889 ;Allocation info for local variables in function 'ReverseGPIOP__0__Out__clr'
+                            890 ;------------------------------------------------------------
+                            891 ;	-----------------------------------------
+                            892 ;	 function ReverseGPIOP__0__Out__clr
+                            893 ;	-----------------------------------------
+   01D5                     894 _ReverseGPIOP__0__Out__clr:
+   01D5 02s01rD2            895 	ljmp	_ReverseGPIOP__0__In__set
+                            896 ;------------------------------------------------------------
+                            897 ;Allocation info for local variables in function 'LedsP__Led0__clr'
+                            898 ;------------------------------------------------------------
+                            899 ;	-----------------------------------------
+                            900 ;	 function LedsP__Led0__clr
+                            901 ;	-----------------------------------------
+   01D8                     902 _LedsP__Led0__clr:
+   01D8 02s01rD5            903 	ljmp	_ReverseGPIOP__0__Out__clr
+                            904 ;------------------------------------------------------------
+                            905 ;Allocation info for local variables in function 'LedsP__Leds__led0On'
+                            906 ;------------------------------------------------------------
+                            907 ;	-----------------------------------------
+                            908 ;	 function LedsP__Leds__led0On
+                            909 ;	-----------------------------------------
+   01DB                     910 _LedsP__Leds__led0On:
+   01DB 02s01rD8            911 	ljmp	_LedsP__Led0__clr
+                            912 ;------------------------------------------------------------
+                            913 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__Leds__led0On'
+                            914 ;------------------------------------------------------------
+                            915 ;	-----------------------------------------
+                            916 ;	 function BlinkNoTimerTaskC__Leds__led0On
+                            917 ;	-----------------------------------------
+   01DE                     918 _BlinkNoTimerTaskC__Leds__led0On:
+   01DE 02s01rDB            919 	ljmp	_LedsP__Leds__led0On
+                            920 ;------------------------------------------------------------
+                            921 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__Boot__booted'
+                            922 ;------------------------------------------------------------
+                            923 ;	-----------------------------------------
+                            924 ;	 function BlinkNoTimerTaskC__Boot__booted
+                            925 ;	-----------------------------------------
+   01E1                     926 _BlinkNoTimerTaskC__Boot__booted:
+   01E1 12s01rDE            927 	lcall	_BlinkNoTimerTaskC__Leds__led0On
+   01E4 12s01rCC            928 	lcall	_BlinkNoTimerTaskC__Leds__led1On
+   01E7 12s01rC2            929 	lcall	_BlinkNoTimerTaskC__Leds__led2On
+   01EA 02s01rAD            930 	ljmp	_BlinkNoTimerTaskC__delay__postTask
+                            931 ;------------------------------------------------------------
+                            932 ;Allocation info for local variables in function 'RealMainP__Boot__booted'
+                            933 ;------------------------------------------------------------
+                            934 ;	-----------------------------------------
+                            935 ;	 function RealMainP__Boot__booted
+                            936 ;	-----------------------------------------
+   01ED                     937 _RealMainP__Boot__booted:
+   01ED 02s01rE1            938 	ljmp	_BlinkNoTimerTaskC__Boot__booted
+                            939 ;------------------------------------------------------------
+                            940 ;Allocation info for local variables in function 'SchedulerBasicP__TaskBasic__default__runTask'
+                            941 ;------------------------------------------------------------
+                            942 ;id                        Allocated with name '_SchedulerBasicP__TaskBasic__default__runTask_id_1_1'
+                            943 ;------------------------------------------------------------
+                            944 ;	-----------------------------------------
+                            945 ;	 function SchedulerBasicP__TaskBasic__default__runTask
+                            946 ;	-----------------------------------------
+   01F0                     947 _SchedulerBasicP__TaskBasic__default__runTask:
+   01F0 22                  948 	ret
+                            949 ;------------------------------------------------------------
+                            950 ;Allocation info for local variables in function 'SchedulerBasicP__TaskBasic__runTask'
+                            951 ;------------------------------------------------------------
+                            952 ;arg_0x2ace41fc53c8        Allocated with name '_SchedulerBasicP__TaskBasic__runTask_arg_0x2ace41fc53c8_1_1'
+                            953 ;------------------------------------------------------------
+                            954 ;	-----------------------------------------
+                            955 ;	 function SchedulerBasicP__TaskBasic__runTask
+                            956 ;	-----------------------------------------
+   01F1                     957 _SchedulerBasicP__TaskBasic__runTask:
+   01F1 E5 82               958 	mov	a,dpl
+   01F3 90s00r0E            959 	mov	dptr,#_SchedulerBasicP__TaskBasic__runTask_arg_0x2ace41fc53c8_1_1
+   01F6 F0                  960 	movx	@dptr,a
+   01F7 FF                  961 	mov	r7,a
+   01F8 FD                  962 	mov	r5,a
+   01F9 7E 00               963 	mov	r6,#0x00
+   01FB BD 00 05            964 	cjne	r5,#0x00,00109$
+   01FE BE 00 02            965 	cjne	r6,#0x00,00109$
+   0201 80 08               966 	sjmp	00101$
+   0203                     967 00109$:
+   0203 BD 01 0B            968 	cjne	r5,#0x01,00103$
+   0206 BE 00 08            969 	cjne	r6,#0x00,00103$
+   0209 80 03               970 	sjmp	00102$
+   020B                     971 00101$:
+   020B 02s03r44            972 	ljmp	_BlinkNoTimerTaskC__toggle__runTask
+   020E                     973 00102$:
+   020E 02s02rEF            974 	ljmp	_BlinkNoTimerTaskC__delay__runTask
+   0211                     975 00103$:
+   0211 8F 82               976 	mov	dpl,r7
+   0213 02s01rF0            977 	ljmp	_SchedulerBasicP__TaskBasic__default__runTask
+                            978 ;------------------------------------------------------------
+                            979 ;Allocation info for local variables in function '__nesc_disable_interrupt'
+                            980 ;------------------------------------------------------------
+                            981 ;	-----------------------------------------
+                            982 ;	 function __nesc_disable_interrupt
+                            983 ;	-----------------------------------------
+   0216                     984 ___nesc_disable_interrupt:
+   0216 C2 AF               985 	clr	_EA
+   0218 22                  986 	ret
+                            987 ;------------------------------------------------------------
+                            988 ;Allocation info for local variables in function '__nesc_enable_interrupt'
+                            989 ;------------------------------------------------------------
+                            990 ;	-----------------------------------------
+                            991 ;	 function __nesc_enable_interrupt
+                            992 ;	-----------------------------------------
+   0219                     993 ___nesc_enable_interrupt:
+   0219 D2 AF               994 	setb	_EA
+   021B 22                  995 	ret
+                            996 ;------------------------------------------------------------
+                            997 ;Allocation info for local variables in function 'McuSleepC__McuSleep__sleep'
+                            998 ;------------------------------------------------------------
+                            999 ;	-----------------------------------------
+                           1000 ;	 function McuSleepC__McuSleep__sleep
+                           1001 ;	-----------------------------------------
+   021C                    1002 _McuSleepC__McuSleep__sleep:
+   021C 12s02r19           1003 	lcall	___nesc_enable_interrupt
+   021F AF BE              1004 	mov	r7,_SLEEP
+   0221 53 07 FC           1005 	anl	ar7,#0xFC
+   0224 8F BE              1006 	mov	_SLEEP,r7
+   0226 02s02r16           1007 	ljmp	___nesc_disable_interrupt
+                           1008 ;------------------------------------------------------------
+                           1009 ;Allocation info for local variables in function 'SchedulerBasicP__McuSleep__sleep'
+                           1010 ;------------------------------------------------------------
+                           1011 ;	-----------------------------------------
+                           1012 ;	 function SchedulerBasicP__McuSleep__sleep
+                           1013 ;	-----------------------------------------
+   0229                    1014 _SchedulerBasicP__McuSleep__sleep:
+   0229 02s02r1C           1015 	ljmp	_McuSleepC__McuSleep__sleep
+                           1016 ;------------------------------------------------------------
+                           1017 ;Allocation info for local variables in function 'SchedulerBasicP__popTask'
+                           1018 ;------------------------------------------------------------
+                           1019 ;id                        Allocated with name '_SchedulerBasicP__popTask_id_2_2'
+                           1020 ;------------------------------------------------------------
+                           1021 ;	-----------------------------------------
+                           1022 ;	 function SchedulerBasicP__popTask
+                           1023 ;	-----------------------------------------
+   022C                    1024 _SchedulerBasicP__popTask:
+   022C 90s00r00           1025 	mov	dptr,#_SchedulerBasicP__m_head
+   022F E0                 1026 	movx	a,@dptr
+   0230 FF                 1027 	mov	r7,a
+   0231 BF FF 02           1028 	cjne	r7,#0xFF,00110$
+   0234 80 35              1029 	sjmp	00104$
+   0236                    1030 00110$:
+   0236 90s00r00           1031 	mov	dptr,#_SchedulerBasicP__m_head
+   0239 E0                 1032 	movx	a,@dptr
+   023A FF                 1033 	mov	r7,a
+   023B 90s00r00           1034 	mov	dptr,#_SchedulerBasicP__m_head
+   023E E0                 1035 	movx	a,@dptr
+   023F 24r02              1036 	add	a,#_SchedulerBasicP__m_next
+   0241 F5 82              1037 	mov	dpl,a
+   0243 E4                 1038 	clr	a
+   0244 34s00              1039 	addc	a,#(_SchedulerBasicP__m_next >> 8)
+   0246 F5 83              1040 	mov	dph,a
+   0248 E0                 1041 	movx	a,@dptr
+   0249 90s00r00           1042 	mov	dptr,#_SchedulerBasicP__m_head
+   024C F0                 1043 	movx	@dptr,a
+   024D 90s00r00           1044 	mov	dptr,#_SchedulerBasicP__m_head
+   0250 E0                 1045 	movx	a,@dptr
+   0251 FE                 1046 	mov	r6,a
+   0252 BE FF 06           1047 	cjne	r6,#0xFF,00102$
+   0255 90s00r01           1048 	mov	dptr,#_SchedulerBasicP__m_tail
+   0258 74 FF              1049 	mov	a,#0xFF
+   025A F0                 1050 	movx	@dptr,a
+   025B                    1051 00102$:
+   025B EF                 1052 	mov	a,r7
+   025C 24r02              1053 	add	a,#_SchedulerBasicP__m_next
+   025E F5 82              1054 	mov	dpl,a
+   0260 E4                 1055 	clr	a
+   0261 34s00              1056 	addc	a,#(_SchedulerBasicP__m_next >> 8)
+   0263 F5 83              1057 	mov	dph,a
+   0265 74 FF              1058 	mov	a,#0xFF
+   0267 F0                 1059 	movx	@dptr,a
+   0268 8F 82              1060 	mov	dpl,r7
+   026A 22                 1061 	ret
+   026B                    1062 00104$:
+   026B 75 82 FF           1063 	mov	dpl,#0xFF
+   026E 22                 1064 	ret
+                           1065 ;------------------------------------------------------------
+                           1066 ;Allocation info for local variables in function 'SchedulerBasicP__Scheduler__taskLoop'
+                           1067 ;------------------------------------------------------------
+                           1068 ;nextTask                  Allocated with name '_SchedulerBasicP__Scheduler__taskLoop_nextTask_2_2'
+                           1069 ;__nesc_atomic             Allocated with name '_SchedulerBasicP__Scheduler__taskLoop___nesc_atomic_3_3'
+                           1070 ;------------------------------------------------------------
+                           1071 ;	-----------------------------------------
+                           1072 ;	 function SchedulerBasicP__Scheduler__taskLoop
+                           1073 ;	-----------------------------------------
+   026F                    1074 _SchedulerBasicP__Scheduler__taskLoop:
+   026F                    1075 00105$:
+   026F 12s00r00           1076 	lcall	___nesc_atomic_start
+   0272 AF 82              1077 	mov	r7,dpl
+   0274                    1078 00101$:
+   0274 C0 07              1079 	push	ar7
+   0276 12s02r2C           1080 	lcall	_SchedulerBasicP__popTask
+   0279 AE 82              1081 	mov	r6,dpl
+   027B D0 07              1082 	pop	ar7
+   027D BE FF 09           1083 	cjne	r6,#0xFF,00103$
+   0280 C0 07              1084 	push	ar7
+   0282 12s02r29           1085 	lcall	_SchedulerBasicP__McuSleep__sleep
+   0285 D0 07              1086 	pop	ar7
+   0287 80 EB              1087 	sjmp	00101$
+   0289                    1088 00103$:
+   0289 8F 82              1089 	mov	dpl,r7
+   028B C0 06              1090 	push	ar6
+   028D 12s00r0A           1091 	lcall	___nesc_atomic_end
+   0290 D0 06              1092 	pop	ar6
+   0292 8E 82              1093 	mov	dpl,r6
+   0294 12s01rF1           1094 	lcall	_SchedulerBasicP__TaskBasic__runTask
+   0297 80 D6              1095 	sjmp	00105$
+                           1096 ;------------------------------------------------------------
+                           1097 ;Allocation info for local variables in function 'RealMainP__Scheduler__taskLoop'
+                           1098 ;------------------------------------------------------------
+                           1099 ;	-----------------------------------------
+                           1100 ;	 function RealMainP__Scheduler__taskLoop
+                           1101 ;	-----------------------------------------
+   0299                    1102 _RealMainP__Scheduler__taskLoop:
+   0299 02s02r6F           1103 	ljmp	_SchedulerBasicP__Scheduler__taskLoop
+                           1104 ;------------------------------------------------------------
+                           1105 ;Allocation info for local variables in function 'main'
+                           1106 ;------------------------------------------------------------
+                           1107 ;__nesc_atomic             Allocated with name '_main___nesc_atomic_2_2'
+                           1108 ;------------------------------------------------------------
+                           1109 ;	-----------------------------------------
+                           1110 ;	 function main
+                           1111 ;	-----------------------------------------
+   029C                    1112 _main:
+   029C 12s00r00           1113 	lcall	___nesc_atomic_start
+   029F AF 82              1114 	mov	r7,dpl
+   02A1 C0 07              1115 	push	ar7
+   02A3 12s00r3A           1116 	lcall	_RealMainP__Scheduler__init
+   02A6 12s00rAD           1117 	lcall	_RealMainP__PlatformInit__init
+   02A9 D0 07              1118 	pop	ar7
+   02AB                    1119 00101$:
+   02AB C0 07              1120 	push	ar7
+   02AD 12s00rB0           1121 	lcall	_RealMainP__Scheduler__runNextTask
+   02B0 E5 82              1122 	mov	a,dpl
+   02B2 D0 07              1123 	pop	ar7
+   02B4 70 F5              1124 	jnz	00101$
+   02B6 C0 07              1125 	push	ar7
+   02B8 12s01rAA           1126 	lcall	_RealMainP__SoftwareInit__init
+   02BB D0 07              1127 	pop	ar7
+   02BD                    1128 00104$:
+   02BD C0 07              1129 	push	ar7
+   02BF 12s00rB0           1130 	lcall	_RealMainP__Scheduler__runNextTask
+   02C2 E5 82              1131 	mov	a,dpl
+   02C4 D0 07              1132 	pop	ar7
+   02C6 70 F5              1133 	jnz	00104$
+   02C8 8F 82              1134 	mov	dpl,r7
+   02CA 12s00r0A           1135 	lcall	___nesc_atomic_end
+   02CD 12s02r19           1136 	lcall	___nesc_enable_interrupt
+   02D0 12s01rED           1137 	lcall	_RealMainP__Boot__booted
+   02D3 12s02r99           1138 	lcall	_RealMainP__Scheduler__taskLoop
+   02D6 90 FF FF           1139 	mov	dptr,#0xFFFF
+   02D9 22                 1140 	ret
+                           1141 ;------------------------------------------------------------
+                           1142 ;Allocation info for local variables in function 'SchedulerBasicP__Scheduler__runNextTask'
+                           1143 ;------------------------------------------------------------
+                           1144 ;nextTask                  Allocated with name '_SchedulerBasicP__Scheduler__runNextTask_nextTask_1_1'
+                           1145 ;__nesc_temp               Allocated with name '_SchedulerBasicP__Scheduler__runNextTask___nesc_temp_4_4'
+                           1146 ;------------------------------------------------------------
+                           1147 ;	-----------------------------------------
+                           1148 ;	 function SchedulerBasicP__Scheduler__runNextTask
+                           1149 ;	-----------------------------------------
+   02DA                    1150 _SchedulerBasicP__Scheduler__runNextTask:
+   02DA 12s02r2C           1151 	lcall	_SchedulerBasicP__popTask
+   02DD AF 82              1152 	mov	r7,dpl
+   02DF BF FF 04           1153 	cjne	r7,#0xFF,00102$
+   02E2 75 82 00           1154 	mov	dpl,#0x00
+   02E5 22                 1155 	ret
+   02E6                    1156 00102$:
+   02E6 8F 82              1157 	mov	dpl,r7
+   02E8 12s01rF1           1158 	lcall	_SchedulerBasicP__TaskBasic__runTask
+   02EB 75 82 01           1159 	mov	dpl,#0x01
+   02EE 22                 1160 	ret
+                           1161 ;------------------------------------------------------------
+                           1162 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__delay__runTask'
+                           1163 ;------------------------------------------------------------
+                           1164 ;i                         Allocated with name '_BlinkNoTimerTaskC__delay__runTask_i_1_1'
+                           1165 ;j                         Allocated with name '_BlinkNoTimerTaskC__delay__runTask_j_1_1'
+                           1166 ;------------------------------------------------------------
+                           1167 ;	-----------------------------------------
+                           1168 ;	 function BlinkNoTimerTaskC__delay__runTask
+                           1169 ;	-----------------------------------------
+   02EF                    1170 _BlinkNoTimerTaskC__delay__runTask:
+   02EF 7E 00              1171 	mov	r6,#0x00
+   02F1 7F 00              1172 	mov	r7,#0x00
+   02F3                    1173 00104$:
+   02F3 C3                 1174 	clr	c
+   02F4 EE                 1175 	mov	a,r6
+   02F5 94 FF              1176 	subb	a,#0xFF
+   02F7 EF                 1177 	mov	a,r7
+   02F8 94 01              1178 	subb	a,#0x01
+   02FA 50 14              1179 	jnc	00107$
+   02FC 7C A0              1180 	mov	r4,#0xA0
+   02FE 7D 00              1181 	mov	r5,#0x00
+   0300                    1182 00103$:
+   0300 1C                 1183 	dec	r4
+   0301 BC FF 01           1184 	cjne	r4,#0xFF,00117$
+   0304 1D                 1185 	dec	r5
+   0305                    1186 00117$:
+   0305 EC                 1187 	mov	a,r4
+   0306 4D                 1188 	orl	a,r5
+   0307 70 F7              1189 	jnz	00103$
+   0309 0E                 1190 	inc	r6
+   030A BE 00 E6           1191 	cjne	r6,#0x00,00104$
+   030D 0F                 1192 	inc	r7
+   030E 80 E3              1193 	sjmp	00104$
+   0310                    1194 00107$:
+   0310 12s00rB3           1195 	lcall	_BlinkNoTimerTaskC__toggle__postTask
+   0313 02s01rAD           1196 	ljmp	_BlinkNoTimerTaskC__delay__postTask
+                           1197 ;------------------------------------------------------------
+                           1198 ;Allocation info for local variables in function 'SchedulerBasicP__TaskBasic__postTask'
+                           1199 ;------------------------------------------------------------
+                           1200 ;id                        Allocated with name '_SchedulerBasicP__TaskBasic__postTask_id_1_1'
+                           1201 ;__nesc_atomic             Allocated with name '_SchedulerBasicP__TaskBasic__postTask___nesc_atomic_2_2'
+                           1202 ;__nesc_temp               Allocated with name '_SchedulerBasicP__TaskBasic__postTask___nesc_temp_4_4'
+                           1203 ;------------------------------------------------------------
+                           1204 ;	-----------------------------------------
+                           1205 ;	 function SchedulerBasicP__TaskBasic__postTask
+                           1206 ;	-----------------------------------------
+   0316                    1207 _SchedulerBasicP__TaskBasic__postTask:
+   0316 E5 82              1208 	mov	a,dpl
+   0318 90s00r0F           1209 	mov	dptr,#_SchedulerBasicP__TaskBasic__postTask_id_1_1
+   031B F0                 1210 	movx	@dptr,a
+   031C 12s00r00           1211 	lcall	___nesc_atomic_start
+   031F AF 82              1212 	mov	r7,dpl
+   0321 90s00r0F           1213 	mov	dptr,#_SchedulerBasicP__TaskBasic__postTask_id_1_1
+   0324 E0                 1214 	movx	a,@dptr
+   0325 F5 82              1215 	mov	dpl,a
+   0327 C0 07              1216 	push	ar7
+   0329 12s00rEC           1217 	lcall	_SchedulerBasicP__pushTask
+   032C E5 82              1218 	mov	a,dpl
+   032E D0 07              1219 	pop	ar7
+   0330 60 04              1220 	jz	00103$
+   0332 7E 00              1221 	mov	r6,#0x00
+   0334 80 02              1222 	sjmp	00104$
+   0336                    1223 00103$:
+   0336 7E 05              1224 	mov	r6,#0x05
+   0338                    1225 00104$:
+   0338 8F 82              1226 	mov	dpl,r7
+   033A C0 06              1227 	push	ar6
+   033C 12s00r0A           1228 	lcall	___nesc_atomic_end
+   033F D0 06              1229 	pop	ar6
+   0341 8E 82              1230 	mov	dpl,r6
+   0343 22                 1231 	ret
+                           1232 ;------------------------------------------------------------
+                           1233 ;Allocation info for local variables in function 'BlinkNoTimerTaskC__toggle__runTask'
+                           1234 ;------------------------------------------------------------
+                           1235 ;	-----------------------------------------
+                           1236 ;	 function BlinkNoTimerTaskC__toggle__runTask
+                           1237 ;	-----------------------------------------
+   0344                    1238 _BlinkNoTimerTaskC__toggle__runTask:
+   0344 90s00r04           1239 	mov	dptr,#_BlinkNoTimerTaskC__cntr
+   0347 E0                 1240 	movx	a,@dptr
+   0348 FE                 1241 	mov	r6,a
+   0349 A3                 1242 	inc	dptr
+   034A E0                 1243 	movx	a,@dptr
+   034B FF                 1244 	mov	r7,a
+   034C 90s00r00           1245 	mov	dptr,#__modsint_PARM_2
+   034F 74 02              1246 	mov	a,#0x02
+   0351 F0                 1247 	movx	@dptr,a
+   0352 A3                 1248 	inc	dptr
+   0353 E4                 1249 	clr	a
+   0354 F0                 1250 	movx	@dptr,a
+   0355 8E 82              1251 	mov	dpl,r6
+   0357 8F 83              1252 	mov	dph,r7
+   0359 12s00r00           1253 	lcall	__modsint
+   035C E5 82              1254 	mov	a,dpl
+   035E 85 83 F0           1255 	mov	b,dph
+   0361 45 F0              1256 	orl	a,b
+   0363 60 03              1257 	jz	00102$
+   0365 12s01r4E           1258 	lcall	_BlinkNoTimerTaskC__Leds__led0Toggle
+   0368                    1259 00102$:
+   0368 12s01r58           1260 	lcall	_BlinkNoTimerTaskC__Leds__led1Toggle
+   036B 02s01r8B           1261 	ljmp	_BlinkNoTimerTaskC__Leds__led2Toggle
+                           1262 ;------------------------------------------------------------
+                           1263 ;Allocation info for local variables in function 'SIG_INTERRUPT0'
+                           1264 ;------------------------------------------------------------
+                           1265 ;	-----------------------------------------
+                           1266 ;	 function SIG_INTERRUPT0
+                           1267 ;	-----------------------------------------
+   036E                    1268 _SIG_INTERRUPT0:
+   036E C0 E0              1269 	push	acc
+   0370 C0 82              1270 	push	dpl
+   0372 C0 83              1271 	push	dph
+   0374 C0 D0              1272 	push	psw
+   0376 90s00r04           1273 	mov	dptr,#_BlinkNoTimerTaskC__cntr
+   0379 E0                 1274 	movx	a,@dptr
+   037A 24 01              1275 	add	a,#0x01
+   037C F0                 1276 	movx	@dptr,a
+   037D A3                 1277 	inc	dptr
+   037E E0                 1278 	movx	a,@dptr
+   037F 34 00              1279 	addc	a,#0x00
+   0381 F0                 1280 	movx	@dptr,a
+   0382 D0 D0              1281 	pop	psw
+   0384 D0 83              1282 	pop	dph
+   0386 D0 82              1283 	pop	dpl
+   0388 D0 E0              1284 	pop	acc
+   038A 32                 1285 	reti
+                           1286 ;	eliminated unneeded mov psw,# (no regs used in bank)
+                           1287 ;	eliminated unneeded push/pop b
+                           1288 	.area CSEG    (CODE)
+                           1289 	.area CONST   (CODE)
+                           1290 	.area XINIT   (CODE)
+                           1291 	.area CABS    (ABS,CODE)
