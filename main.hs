@@ -42,7 +42,7 @@ printProg = printResult . doAnal
 main = do
     args <- getArgs
     case args of
-        [] -> fail "No input file given"
+        [] -> getContents >>= printProg . asm . lexer
         _:_:t -> fail "Too many arguments"
         [a] -> readFile a >>= printProg . asm . lexer
 
